@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стоимость номеров</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+        th, td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eaeaea;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #34495e;
+            white-space: normal; /* Allows room names to wrap on smaller screens */
+            min-width: 250px;
+        }
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .price::after {
+            content: " ₽";
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Стоимость проживания (в рублях)</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Тип номера</th>
+                    <th>до 01 Июня</th>
+                    <th>с 1 Июня<br>по 14 июня</th>
+                    <th>с 15 Июня<br>по 30 Июня</th>
+                    <th>с 1 Июля<br>по 10 Июля</th>
+                    <th>с 11 июля<br>по 26 Августа</th>
+                    <th>с 27 Августа<br>по 15 Сентября</th>
+                    <th>после 15<br>Сентября</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Одноместный номер</td>
+                    <td class="price">1300</td>
+                    <td class="price">1400</td>
+                    <td class="price">1600</td>
+                    <td class="price">1800</td>
+                    <td class="price">2100</td>
+                    <td class="price">1800</td>
+                    <td class="price">1400</td>
+                </tr>
+                <tr>
+                    <td>Стандартный двухместный номер с 1 кроватью</td>
+                    <td class="price">1800</td>
+                    <td class="price">2000</td>
+                    <td class="price">2300</td>
+                    <td class="price">2500</td>
+                    <td class="price">2900</td>
+                    <td class="price">2400</td>
+                    <td class="price">2000</td>
+                </tr>
+                <tr>
+                    <td>Классический двухместный номер с 2 отдельными кроватями</td>
+                    <td class="price">1800</td>
+                    <td class="price">2000</td>
+                    <td class="price">2300</td>
+                    <td class="price">2500</td>
+                    <td class="price">2900</td>
+                    <td class="price">2400</td>
+                    <td class="price">2000</td>
+                </tr>
+                <tr>
+                    <td>Двухместный номер 'Комфорт' с 1 кроватью</td>
+                    <td class="price">2000</td>
+                    <td class="price">2400</td>
+                    <td class="price">2700</td>
+                    <td class="price">3000</td>
+                    <td class="price">3400</td>
+                    <td class="price">3000</td>
+                    <td class="price">2200</td>
+                </tr>
+                <tr>
+                    <td>Стандартный трехместный номер</td>
+                    <td class="price">2500</td>
+                    <td class="price">2700</td>
+                    <td class="price">3200</td>
+                    <td class="price">3600</td>
+                    <td class="price">4100</td>
+                    <td class="price">3400</td>
+                    <td class="price">2300</td>
+                </tr>
+                <tr>
+                    <td>Трехместный номер 'Комфорт'</td>
+                    <td class="price">2700</td>
+                    <td class="price">3100</td>
+                    <td class="price">3700</td>
+                    <td class="price">4300</td>
+                    <td class="price">4700</td>
+                    <td class="price">4000</td>
+                    <td class="price">3000</td>
+                </tr>
+                <tr>
+                    <td>Стандартный люкс</td>
+                    <td class="price">3500</td>
+                    <td class="price">4000</td>
+                    <td class="price">4800</td>
+                    <td class="price">5200</td>
+                    <td class="price">6200</td>
+                    <td class="price">4900</td>
+                    <td class="price">3800</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

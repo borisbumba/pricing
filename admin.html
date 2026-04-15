@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Dashboard - Availability</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; padding: 20px; }
+        .admin-panel { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; }
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 4px; font-size: 16px; margin-top: 20px; cursor: pointer; }
+        button:hover { background-color: #219653; }
+        #message { margin-top: 15px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="admin-panel">
+    <h2>Управление номерами (Host Only)</h2>
+    
+    <label>Secret PIN:</label>
+    <input type="password" id="pin" placeholder="Enter your host PIN">
+
+    <label>Дата:</label>
+    <input type="date" id="date">
+
+    <label>Тип номера:</label>
+    <select id="room">
+        <option value="Одноместный номер">Одноместный номер</option>
+        <option value="Стандартный 2-местный">Стандартный двухместный номер (1 кровать)</option>
+        <option value="Классический 2-местный">Классический двухместный (2 кровати)</option>
+        <option value="Комфорт 2-местный">Двухместный 'Комфорт'</option>
+        <option value="Стандартный 3-местный">Стандартный трехместный номер</option>
+        <option value="Комфорт 3-местный">Трехместный номер 'Комфорт'</option>
+        <option value="Люкс">Стандартный люкс</option>
+    </select>
+
+    <label>Статус:</label>
+    <select id="status">
+        <option value="Забронирован">🔴 Забронирован (Booked)</option>
+        <option value="Свободен">🟢 Свободен (Available)</option>
+    </select>
+
+    <button onclick="updateAvailability()">Обновить статус</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+    // PASTE YOUR GOOGLE SCRIPT URL HERE
+    const GOOGLE_APP_URL = "https://script.google.com/macros/s/AKfycbxQGovBxf0r9YQrs7oMmtJUj2UPcdZvImCBMkjrZhTbK3SktqqBvWW-vtku992474UV/exec";
+
+    async function updateAvailability() {
+        const pin = document.getElementById('pin').value;
+        const date = document.getElementById('date').value;
+        const room = document.getElementById('room').value;
+        const status = document.getElementById('status').value;
+        const messageDiv = document.getElementById('message');
+
+        if(!pin || !date) {
+            messageDiv.style.color = "red";
+            messageDiv.innerText = "Please fill in the PIN and Date.";
+            return;
+        }
+
+        messageDiv.style.color = "blue";
+        messageDiv.innerText = "Updating... Please wait.";
+
+        try {
+            const response = await fetch(GOOGLE_APP_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" }, // text/plain prevents strict CORS blocks
+                body: JSON.stringify({ pin: pin, date: date, room: room, status: status })
+            });
+            
+            const result = await response.text();
+            
+            if (result.includes("Success")) {
+                messageDiv.style.color = "green";
+                messageDiv.innerText = "Успешно! " + result;
+            } else {
+                messageDiv.style.color = "red";
+                messageDiv.innerText = result; // E.g., "Incorrect PIN"
+            }
+        } catch (error) {
+            messageDiv.style.color = "red";
+            messageDiv.innerText = "Connection error. Please try again.";
+        }
+    }
+</script>
+
+</body>
+</html>
